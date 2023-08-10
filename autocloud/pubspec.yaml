@@ -3,12 +3,16 @@ description: A starting point for Dart libraries or applications.
 version: 0.0.1
 # repository: https://github.com/my_org/my_repo
 
+executables:
+  acp: auto
+
 environment:
   sdk: ^3.0.5
 
 # Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  thp_markhor:
+    path: ../../Markhor/markhor
 
 dev_dependencies:
   lints: ^2.0.0

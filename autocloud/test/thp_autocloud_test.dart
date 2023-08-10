@@ -1,4 +1,4 @@
-import 'package:thp_autocloud/thp_autocloud.dart';
+import 'package:thp_autocloud/autocloud_sdk.dart';
 import 'package:test/test.dart';
 
 void main() {
