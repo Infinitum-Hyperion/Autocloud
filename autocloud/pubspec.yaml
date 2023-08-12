@@ -4,13 +4,14 @@ version: 0.0.1
 # repository: https://github.com/my_org/my_repo
 
 executables:
-  acp: auto
+  auto: auto
 
 environment:
   sdk: ^3.0.5
 
 # Add regular dependencies here.
 dependencies:
+  args: ^2.4.2
   thp_markhor:
     path: ../../Markhor/markhor
 
