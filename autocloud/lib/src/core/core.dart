@@ -3,7 +3,11 @@ library autocloud.sdk.core;
 import 'package:thp_autocloud/autocloud_sdk.dart';
 
 part './architecture/autonomic_component.dart';
-part './architecture/autonomic_cell.dart';
+part './architecture/autonomic_motor_cell.dart';
+part './architecture/autonomic_sensory_cell.dart';
+
+part './data_structures/table.dart';
+part './data_structures/storable.dart';
 
 abstract class AutonomicElement {
   final String elementId;
@@ -16,5 +20,17 @@ abstract class AutonomicElement {
 
   @override
   bool operator ==(Object other) =>
-      other is AutonomicElement && other.elementId == elementId;
+      other is AutonomicElement &&
+      other.elementId == elementId &&
+      other.systemId == systemId;
+}
+
+abstract class AutonomicCell extends AutonomicElement {
+  final Observatory observatory;
+
+  const AutonomicCell({
+    required this.observatory,
+    required super.elementId,
+    required super.systemId,
+  });
 }

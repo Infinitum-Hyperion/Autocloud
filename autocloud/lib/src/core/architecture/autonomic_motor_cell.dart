@@ -5,19 +5,29 @@ part of autocloud.sdk.core;
 /// the function required. The cell merely acts as an interface to the underlying
 /// component. This is bearing in mind that the [AutonomicComponent] can get
 /// swapped out frequently during the system's execution.
-abstract class AutonomicCell<I, O> extends AutonomicElement {
+abstract class AutonomicMotorCell<I, O> extends AutonomicCell with Logging {
   final String cellLabel;
-  final Observatory observatory;
 
-  const AutonomicCell({
+  const AutonomicMotorCell({
     required this.cellLabel,
-    required this.observatory,
+    required super.observatory,
     required super.elementId,
     required super.systemId,
   });
 
-  O run(I input) => component.action.call(input);
+  O run(I input) {
+    observatory.contextMonitor.setContext(this);
+    final ExecutionSpan span = ExecutionSpan(cell: this);
+    try {
+      final O output = component.action.call(input);
+      return output;
+    } catch (e) {
+      rethrow;
+    } finally {
+      observatory.contextMonitor.logSpan(span);
+      observatory.contextMonitor.endContext();
+    }
+  }
 
   AutonomicComponent<I, O> get component;
 }
-
