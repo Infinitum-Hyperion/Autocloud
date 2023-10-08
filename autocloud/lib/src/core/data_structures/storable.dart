@@ -28,3 +28,10 @@ class DateTimeStorable extends SingleElement<DateTime, String> {
   @override
   String toStorable() => native.toIso8601String();
 }
+
+class DurationStorable extends SingleElement<Duration, int> {
+  const DurationStorable(super.native);
+
+  @override
+  int toStorable() => native.inMilliseconds;
+}
