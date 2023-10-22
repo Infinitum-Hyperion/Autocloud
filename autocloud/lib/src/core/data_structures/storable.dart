@@ -1,37 +1,35 @@
 part of autocloud.sdk.core;
 
-abstract class Storable {
-  const Storable();
+/// Tools to enable native objects to be converted to and from JSON representations
 
-  Object? toStorable();
+mixin Storable<S> {
+  S serialize();
 }
 
-abstract class SingleElement<N, S> extends Storable {
-  final N native;
-
-  const SingleElement(this.native);
-
-  @override
-  S toStorable();
+extension StorableListUtils on List<Storable> {
+  /// Serialize a list of [Storable]s
+  List<Object?> toStorableList() => [for (final e in this) e.serialize()];
 }
 
-abstract class StorableJson extends Storable {
-  @override
-  Object? toStorable() => toJson();
-
-  Map<String, Object?> toJson();
+extension ListUtils<O> on List<O> {
+  /// Convert a [List<O>] to [List<N>]
+  List<N> listOf<N>(N Function(O) converter) => map(converter).toList();
 }
 
-class DateTimeStorable extends SingleElement<DateTime, String> {
-  const DateTimeStorable(super.native);
+extension JSONUtils on JSON {
+  T get<T>(String key) => this[key] as T;
 
-  @override
-  String toStorable() => native.toIso8601String();
+  List<Object?> getList(String key) => get<List<Object?>>(key);
 }
 
-class DurationStorable extends SingleElement<Duration, int> {
-  const DurationStorable(super.native);
+extension DateTimeStorability on DateTime {
+  int serialize() => millisecondsSinceEpoch;
+  static DateTime deserialize(Object? storable) =>
+      DateTime.fromMillisecondsSinceEpoch((storable as int));
+}
 
-  @override
-  int toStorable() => native.inMilliseconds;
+extension DurationStorability on Duration {
+  int serialize() => inMilliseconds;
+  static Duration deserialize(Object? storable) =>
+      Duration(milliseconds: (storable as int));
 }

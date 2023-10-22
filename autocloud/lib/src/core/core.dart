@@ -5,9 +5,12 @@ import 'package:thp_autocloud/autocloud_sdk.dart';
 part './architecture/autonomic_component.dart';
 part './architecture/autonomic_motor_cell.dart';
 part './architecture/autonomic_sensory_cell.dart';
+part './architecture/objectives.dart';
 
 part './data_structures/table.dart';
 part './data_structures/storable.dart';
+
+typedef JSON = Map<String, Object?>;
 
 abstract class AutonomicElement {
   final String elementId;
