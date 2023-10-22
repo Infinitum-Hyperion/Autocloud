@@ -1,9 +1,11 @@
 part of autocloud.sdk.core;
 
-class AutonomicSensoryCell extends AutonomicCell {
-  const AutonomicSensoryCell({
+abstract class AutonomicSensoryCell extends AutonomicCell {
+  AutonomicSensoryCell({
     required super.observatory,
     required super.elementId,
     required super.systemId,
   });
+
+  void init();
 }
