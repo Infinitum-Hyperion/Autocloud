@@ -1,6 +1,7 @@
 library autocloud.sdk.core;
 
 import 'package:thp_autocloud/autocloud_sdk.dart';
+import 'package:thp_autocloud/src/core/observatory/observatory.dart';
 
 part './architecture/autonomic_component.dart';
 part './architecture/autonomic_motor_cell.dart';
