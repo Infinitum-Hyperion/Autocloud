@@ -30,7 +30,7 @@ class Datahouse {
     if (registry.containsKey(channel)) {
       channel.items.add(item);
       for (ChannelListener cl in registry[channel]!) {
-        cl.notifier.call(item);
+        (cl as ChannelListener<S>).notifier.call(item);
       }
     } else {
       throw "Channel not exist";
