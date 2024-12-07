@@ -8,4 +8,6 @@ class ACPColor {
   static const Color pink = Color(0XFFFF0054);
   static const Color gold = Color(0XFFFCA311);
   static const Color blue = Color(0xFF0D1B2A);
+  static const Color white10 = Color(0xFF202930);
+  static const Color white30 = Color(0xFF4E5553);
 }
