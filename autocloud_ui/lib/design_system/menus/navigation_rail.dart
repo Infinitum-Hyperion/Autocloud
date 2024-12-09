@@ -19,14 +19,13 @@ class ACPNavigationRail extends StatefulWidget {
   final List<ACPNavigationRailItemData> railItems;
   final int activeIndex;
 
-  const ACPNavigationRail({
+  ACPNavigationRail({
     required this.closedWidth,
     required this.expandedWidth,
     required this.height,
     required this.railItems,
     required this.activeIndex,
-    super.key,
-  });
+  }) : super(key: ValueKey(railItems));
 
   @override
   State<StatefulWidget> createState() => ACPNavigationRailState();
@@ -47,11 +46,9 @@ class ACPNavigationRailState extends State<ACPNavigationRail> {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuilding ($activeIndex)');
+    print(activeIndex);
     final List<ExpandableIconButton> buttons = [];
     for (int i = 0; i < widget.railItems.length; i++) {
-      print('built (${widget.railItems[i].label})');
-
       buttons.add(
         ExpandableIconButton(
           itemData: widget.railItems[i],
@@ -84,31 +81,7 @@ class ACPNavigationRailState extends State<ACPNavigationRail> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ACPButton(
-                width: width,
-                height: CONST.navigationRailWidth,
-                persistent: false,
-                action: () {
-                  Navigator.pushNamed(context, PageViewId.home.id);
-                },
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Icon(
-                    size: widget.closedWidth - 10,
-                    Icons.home,
-                    color: ACPColor.cyan,
-                  ),
-                ),
-              ),
-              const Divider(color: ACPColor.white10),
-              SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: buttons,
-                ),
-              ),
-            ],
+            children: buttons,
           ),
         ),
       ),

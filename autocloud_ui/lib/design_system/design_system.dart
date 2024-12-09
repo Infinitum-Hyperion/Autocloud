@@ -3,12 +3,16 @@ library autocloud.ui.ds;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:autocloud_ui/utils/meta.dart';
+
 part './colors.dart';
+part 'menus/navigation_menu.dart';
 part 'menus/navigation_rail.dart';
 part 'globals/global_app_bar.dart';
 part 'globals/global_nav_rail.dart';
 part 'globals/global_scaffold.dart';
 part './globals/global_state.dart';
+part './globals/transitions.dart';
 
 part './buttons/button.dart';
 part './buttons/expandable_icon_button.dart';

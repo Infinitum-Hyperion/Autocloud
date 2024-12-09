@@ -1,11 +1,11 @@
 part of autocloud.ui.ds;
 
-class GlobalACPNavigationRail extends StatelessWidget {
+/* class GlobalACPNavigationRail extends StatelessWidget {
   const GlobalACPNavigationRail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ACPNavigationRail(
+    return ACPMainNavigationRail(
       closedWidth: CONST.navigationRailWidth,
       expandedWidth: MediaQuery.of(context).size.width * 0.2,
       height: MediaQuery.of(context).size.height,
@@ -29,3 +29,4 @@ class GlobalACPNavigationRail extends StatelessWidget {
     );
   }
 }
+ */

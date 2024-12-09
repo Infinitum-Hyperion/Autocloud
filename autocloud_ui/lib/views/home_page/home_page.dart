@@ -10,7 +10,7 @@ class AutocloudHomePage extends StatefulWidget {
 }
 
 class AutocloudHomePageState extends PageScaffoldState<AutocloudHomePage> {
-  AutocloudHomePageState() : super(pageId: PageViewId.home);
+  AutocloudHomePageState() : super(pageId: PageViewId.ac_home);
   @override
   Widget build(BuildContext context) {
     return const ACPGlobalScaffold(

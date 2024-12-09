@@ -1,9 +1,8 @@
 part of autocloud.ui.ds;
 
-class GlobalACPAppBar extends StatelessWidget {
-  const GlobalACPAppBar({super.key});
+class GlobalACPAppBar extends AppBar {
+  GlobalACPAppBar({super.key});
 
-  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(

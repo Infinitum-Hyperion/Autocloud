@@ -34,7 +34,6 @@ class ACPButtonState extends State<ACPButton> {
 
   @override
   Widget build(BuildContext context) {
-    print("Y: ${(widget.persistent && (currentState == ButtonState.active))}");
     return Center(
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),

@@ -1,6 +1,7 @@
 library autocloud.ui;
 
 import 'package:autocloud_ui/design_system/design_system.dart';
+import 'package:autocloud_ui/utils/meta.dart';
 import 'package:markhor_ui/main.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,20 @@ class AutocloudInterface extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'AutoCloud Platform',
-      initialRoute: '/home',
+      title: 'AutoCloud',
+      initialRoute: PageViewId.ac_home.id,
+      theme: ThemeData(
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: {
+            for (final platform in TargetPlatform.values)
+              platform: const NoTransitionsBuilder(),
+          },
+        ),
+      ),
       routes: {
-        '/home': (_) => const AutocloudHomePage(),
-        '/markhor': (_) => MarkhorOverviewPage(),
+        PageViewId.ac_home.id: (_) => const AutocloudHomePage(),
+        "${PageViewId.markhor.id}${PageViewId.mk_liveTelemetry.id}": (_) =>
+            const MarkhorLiveTelemetryView(),
       },
     );
   }
