@@ -1,5 +1,6 @@
 library autocloud.ui.ds;
 
+import 'package:autocloud_sdk/autocloud_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,6 +17,10 @@ part './globals/transitions.dart';
 
 part './buttons/button.dart';
 part './buttons/expandable_icon_button.dart';
+
+part './fonts/fonts.dart';
+
+part './containers/pane.dart';
 
 enum ButtonState { inactive, hovered, pressed, active }
 
