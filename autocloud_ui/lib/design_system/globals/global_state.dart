@@ -1,6 +1,7 @@
 part of autocloud.ui.ds;
 
 class GlobalState {
+  static late AutocloudProject autocloudProject;
   static const List<PageMeta> pages = [
     PageMeta(
       iconData: Icons.home,
@@ -35,15 +36,12 @@ class GlobalState {
 
   static PageViewId pageId = PageViewId.markhor;
   static PageViewId viewId = PageViewId.mk_workstation;
-  static int get currentPageIndex => switch (GlobalState.pageId) {
-        PageViewId.autocloud => 0,
-        PageViewId.markhor => 1,
-        PageViewId() => 0,
-      };
+  static int get currentPageIndex =>
+      pages.indexWhere((pageMeta) => pageMeta.id.id == pageId.id);
 
   static int get currentViewIndex =>
       pages[currentPageIndex].views.indexWhere((viewMeta) =>
-          viewMeta.id(pages[currentPageIndex]) == "$pageId${viewId.id}");
+          viewMeta.id(pages[currentPageIndex]) == "${pageId.id}${viewId.id}");
 }
 
 class CONST {

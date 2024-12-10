@@ -16,6 +16,7 @@ class ACPGlobalScaffoldState extends State<ACPGlobalScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey(GlobalState.currentPageIndex),
       backgroundColor: ACPColor.blue,
       appBar: AppBar(
         backgroundColor: ACPColor.blue,
@@ -35,7 +36,7 @@ class ACPGlobalScaffoldState extends State<ACPGlobalScaffold> {
         ),
         title: Text(
           GlobalState.pages[GlobalState.currentPageIndex].label,
-          style: const TextStyle(color: ACPColor.cyan),
+          style: ACPFont.pageTitle(const TextStyle(color: ACPColor.cyan)),
         ),
         centerTitle: false,
       ),
@@ -47,8 +48,9 @@ class ACPGlobalScaffoldState extends State<ACPGlobalScaffold> {
             ACPNavigationRailItemData(
               iconData: pageMeta.iconData,
               label: pageMeta.label,
-              action: () => Navigator.of(context)
-                  .pushNamed(pageMeta.views[0].id(pageMeta)),
+              action: () => setState(() {
+                Navigator.of(context).pushNamed(pageMeta.views[0].id(pageMeta));
+              }),
             ),
         ],
         activeIndex: GlobalState.currentPageIndex,
@@ -56,11 +58,16 @@ class ACPGlobalScaffoldState extends State<ACPGlobalScaffold> {
       body: Stack(
         children: [
           Positioned(
-            top: CONST.globalAppBarHeight,
+            top: 0,
             left: CONST.navigationRailWidth,
+            right: 0,
+            bottom: 0,
             child: widget.child,
           ),
           Positioned(
+            top: 0,
+            left: 0,
+            bottom: 0,
             child: ACPNavigationRail(
               closedWidth: CONST.navigationRailWidth,
               expandedWidth: MediaQuery.of(context).size.width * 0.2,
@@ -71,8 +78,10 @@ class ACPGlobalScaffoldState extends State<ACPGlobalScaffold> {
                   ACPNavigationRailItemData(
                     iconData: viewMeta.iconData,
                     label: viewMeta.label,
-                    action: () => Navigator.of(context).pushNamed(viewMeta
-                        .id(GlobalState.pages[GlobalState.currentPageIndex])),
+                    action: () => setState(() {
+                      Navigator.of(context).pushNamed(viewMeta
+                          .id(GlobalState.pages[GlobalState.currentPageIndex]));
+                    }),
                   ),
               ],
               activeIndex: GlobalState.currentViewIndex,
@@ -84,25 +93,20 @@ class ACPGlobalScaffoldState extends State<ACPGlobalScaffold> {
   }
 }
 
-abstract class PageScaffoldState<T extends StatefulWidget> extends State<T> {
+abstract class ViewScaffoldState<T extends StatefulWidget> extends State<T> {
   final PageViewId pageId;
-  PageScaffoldState({required this.pageId});
+
+  final PageViewId viewId;
+
+  ViewScaffoldState({
+    required this.pageId,
+    required this.viewId,
+  });
 
   @override
   void initState() {
     GlobalState.pageId = pageId;
-    super.initState();
-  }
-}
-
-abstract class ViewScaffoldState<T extends StatefulWidget> extends State<T> {
-  final PageViewId viewId;
-  ViewScaffoldState({required this.viewId});
-
-  @override
-  void initState() {
     GlobalState.viewId = viewId;
-    print('set');
     super.initState();
   }
 }

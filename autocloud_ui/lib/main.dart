@@ -7,10 +7,6 @@ import 'package:flutter/material.dart';
 
 part 'views/home_page/home_page.dart';
 
-void main() {
-  runApp(const AutocloudInterface());
-}
-
 class AutocloudInterface extends StatelessWidget {
   const AutocloudInterface({super.key});
 
@@ -19,7 +15,7 @@ class AutocloudInterface extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AutoCloud',
-      initialRoute: PageViewId.ac_home.id,
+      initialRoute: "${PageViewId.autocloud.id}${PageViewId.ac_home.id}",
       theme: ThemeData(
         pageTransitionsTheme: PageTransitionsTheme(
           builders: {
@@ -29,9 +25,13 @@ class AutocloudInterface extends StatelessWidget {
         ),
       ),
       routes: {
-        PageViewId.ac_home.id: (_) => const AutocloudHomePage(),
+        "${PageViewId.autocloud.id}${PageViewId.ac_home.id}": (_) =>
+            const AutocloudHomePage(),
         "${PageViewId.markhor.id}${PageViewId.mk_liveTelemetry.id}": (_) =>
-            const MarkhorLiveTelemetryView(),
+            MarkhorLiveTelemetryView(
+              viewModes: GlobalState
+                  .autocloudProject.markhorConfigs.liveTelemetryViewModes,
+            ),
       },
     );
   }

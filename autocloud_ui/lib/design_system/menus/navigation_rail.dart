@@ -46,7 +46,6 @@ class ACPNavigationRailState extends State<ACPNavigationRail> {
 
   @override
   Widget build(BuildContext context) {
-    print(activeIndex);
     final List<ExpandableIconButton> buttons = [];
     for (int i = 0; i < widget.railItems.length; i++) {
       buttons.add(
